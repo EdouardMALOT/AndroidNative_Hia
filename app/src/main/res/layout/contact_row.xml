@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="horizontal"
+
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="0.99"
+        android:layout_gravity="right"
+        >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:gravity="center_vertical"
+                    android:id="@+id/NameView"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:layout_marginLeft="10dp"
+                    />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.01"
+        android:layout_gravity="left"
+        >
+
+
+        <com.nightonke.boommenu.BoomMenuButton
+            android:id="@+id/boom_circle"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            app:boom_inList="true"
+            />
+
+
+        <!--
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageButtonHia"
+                    android:background="@drawable/position"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="20dp"
+                    />
+
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageButtonHiaQuestion"
+                    android:background="@drawable/questionposition"
+                    android:layout_marginLeft="5dp"
+                    />
+         -->
+    </LinearLayout>
+
+
+
+</LinearLayout>

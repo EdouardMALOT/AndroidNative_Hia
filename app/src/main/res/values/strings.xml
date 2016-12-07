@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Téoù</string>
+    <string name="AppTitle">T\'es où ?</string>
+
+    <string name="facebook_app_id">524482717747812</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="InternetConnexionError">Pas de connexion internet !</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <string name="prompt_phone_number">0601020304</string>
+    <string name="ErrorConnexionImpossible">{\"Error\":\"Url inconnue\"}</string>
+
+    <string name="ErrorIsNotaPhoneNumber">Format du N° incorrect</string>
+    <string name="GPSNeedToBeActivate">Le GPS doit être activé</string>
+
+    <string name="ContactAccessError">L\'accès au carnet d\'adresse est indispensable pour utiliser cette application</string>
+    <string name="reply_label">Accepter</string>
+    <string name="GPSAccessErrorMsg">Le GPS est indispensable pour cette application</string>
+
+</resources>

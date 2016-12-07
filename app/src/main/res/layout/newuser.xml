@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:text="Veuillez saisir votre N° de tel :"
+        android:typeface="normal"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+
+        android:id="@+id/editTextphonenumber"
+        android:inputType="phone"
+
+        android:digits="0123456789"
+        android:hint="@string/prompt_phone_number"
+        android:textSize="18sp" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+
+        android:id="@+id/button_envoyer_phone_number"
+
+        android:text=" Créer votre compte "
+        />
+
+</LinearLayout>

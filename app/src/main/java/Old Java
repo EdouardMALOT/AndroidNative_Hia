@@ -1,0 +1,262 @@
+    //////////////////////////////////
+    //                              //
+    //                              //
+    //          ShowHashKey         //
+    //                              //
+    //                              //
+    //////////////////////////////////
+    private void ShowHashKey() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo("io.hia.hia", PackageManager.GET_SIGNATURES);
+
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d(LOG_TAG + "/KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+    //////////////////////////////////
+    //                              //
+    //                              //
+    //       getBitmapFromURL       //
+    //                              //
+    //                              //
+    //////////////////////////////////
+    /*
+    public static Bitmap getBitmapFromURL(String imgUrl) {
+        try {
+            URL url = new URL(imgUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //////////////////////////////////
+    //                              //
+    //                              //
+    //       FacebookManager        //
+    //                              //
+    //                              //
+    //////////////////////////////////
+    /*
+
+    //Gradle
+    //------
+
+        repositories {
+            mavenCentral()
+        }
+
+        compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //Manifeste
+    //---------
+
+
+            <meta-data
+                    android:name="com.facebook.sdk.ApplicationId"
+                    android:value="@string/facebook_app_id"
+                />
+
+
+            <provider
+                android:authorities="com.facebook.app.FacebookContentProvider1305442766157388"
+                android:name="com.facebook.FacebookContentProvider"
+                android:exported="true"
+                />
+
+
+
+                 <activity
+                     android:name="com.facebook.FacebookActivity"
+                     android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+
+                     android:label="@string/app_name"
+                     />
+
+
+
+    // headers:
+        import com.facebook.CallbackManager;
+        import com.facebook.FacebookCallback;
+        import com.facebook.FacebookException;
+        import com.facebook.FacebookSdk;
+        import com.facebook.GraphRequest;
+        import com.facebook.GraphResponse;
+        import com.facebook.appevents.AppEventsLogger;
+        import com.facebook.login.LoginResult;
+        import com.facebook.login.widget.LoginButton;
+
+
+    //Variables
+        private TextView info;
+        private LoginButton loginButton;
+        private CallbackManager callbackManager;
+
+
+    //Facebook SDK initialisation
+        //FacebookSdk.sdkInitialize(getApplicationContext());
+
+        //Facebook log
+        //AppEventsLogger.activateApp(getApplication());
+
+        //Register facebook callback
+        //--------------------------
+        //setContentView(R.layout.activity_main);
+        //FacebookManager();
+
+
+
+    private void FacebookManager() {
+
+        //Facebook callback initialisation
+        callbackManager = CallbackManager.Factory.create();
+
+        //Init layout
+        info = (TextView)findViewById(R.id.info);
+        loginButton = (LoginButton)findViewById(R.id.login_button);
+
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                info.setText("User ID: " + loginResult.getAccessToken().getUserId() + "\n" + "Auth Token: " + loginResult.getAccessToken().getToken());
+
+
+
+                GraphRequest request = GraphRequest.newMeRequest( loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                response.getError();
+
+                                try {
+                                    if (android.os.Build.VERSION.SDK_INT > 9) {
+
+                                        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                                        StrictMode.setThreadPolicy(policy);
+                                        String profilePicUrl = object.getJSONObject("picture").getJSONObject("data").getString("url");
+
+                                        Log.d(LOG_TAG,profilePicUrl);
+
+                                        URL fb_url = new URL(profilePicUrl);
+                                        HttpsURLConnection conn1 = (HttpsURLConnection) fb_url.openConnection();
+                                        HttpsURLConnection.setFollowRedirects(true);
+                                        conn1.setInstanceFollowRedirects(true);
+
+                                        Bitmap fb_img = BitmapFactory.decodeStream(conn1.getInputStream());;
+                                        ImageView ImageProfileView = (ImageView) findViewById(R.id.image_profile);
+                                        ImageProfileView.setImageBitmap(fb_img);
+                                    }
+                                }catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "picture.width(200).height(200)");
+                request.setParameters(parameters);
+                request.executeAsync();
+
+            }
+
+            @Override
+            public void onCancel() {
+                info.setText("Login attempt canceled.");
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                info.setText("Login attempt failed.");
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+    */
+
+
+
+
+
+    /*
+    //////////////////////////////////////////////////
+    //                                              //
+    //                                              //
+    //               GetContactsList                //
+    //                                              //
+    //                                              //
+    //////////////////////////////////////////////////
+    public void GetContactsList(List<String> Names, List<String> Number) {
+
+        Names.clear();
+        Number.clear();
+
+        if(VerifyContactsPermissions(this)) {
+
+            Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+            String PreviousName = "";
+
+            while (phones.moveToNext()) {
+
+                //Get name and phone number
+                    String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+                //Only Add name with number and prevent duplicated contacts
+                    if (!phoneNumber.isEmpty() && !PreviousName.contentEquals(name)) {
+                        Names.add(name);
+                        Number.add(phoneNumber);
+                    }
+
+                    PreviousName = name;
+            }
+            phones.close();
+        }
+    }
+    */
+
