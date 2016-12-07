@@ -16,8 +16,7 @@
     string in this file.
     -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-    //TODO : Put your google maps key (from : https://console.developers.google.com/)
-
+hjk
     </string>
 
 </resources>
